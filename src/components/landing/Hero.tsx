@@ -6,8 +6,8 @@ import { Sparkles } from "lucide-react";
 const Hero = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
     {/* Ambient glow */}
-    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-pink/10 rounded-full blur-[120px]" />
-    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-purple/10 rounded-full blur-[120px]" />
+    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-pink/8 rounded-full blur-[140px]" />
+    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-purple/8 rounded-full blur-[140px]" />
 
     <div className="container mx-auto px-4 text-center relative z-10">
       <motion.div
@@ -34,7 +34,7 @@ const Hero = () => (
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/auth">
+          <Link to="/upload">
             <GradientButton size="lg">Try Your Style ✨</GradientButton>
           </Link>
           <Link to="/#how-it-works">
@@ -50,20 +50,40 @@ const Hero = () => (
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.4 }}
-        className="mt-16 flex justify-center gap-4"
+        className="mt-16 flex justify-center gap-5 md:gap-6"
       >
         {[
-          { label: "Casual", color: "from-gradient-pink/20 to-gradient-purple/20" },
-          { label: "Street", color: "from-gradient-purple/20 to-gradient-teal/20" },
-          { label: "Formal", color: "from-gradient-teal/20 to-gradient-pink/20" },
+          {
+            label: "Casual",
+            color: "from-gradient-pink/20 to-gradient-purple/20",
+            image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=560&fit=crop&crop=top",
+          },
+          {
+            label: "Street",
+            color: "from-gradient-purple/20 to-gradient-teal/20",
+            image: "https://images.unsplash.com/photo-1516826957135-700dedea698c?w=400&h=560&fit=crop&crop=top",
+          },
+          {
+            label: "Formal",
+            color: "from-gradient-teal/20 to-gradient-pink/20",
+            image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=560&fit=crop&crop=top",
+          },
         ].map((style, i) => (
           <motion.div
             key={style.label}
-            animate={{ y: [0, -8, 0] }}
+            animate={{ y: [0, -10, 0] }}
             transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-            className={`w-32 h-44 md:w-40 md:h-56 rounded-2xl bg-gradient-to-br ${style.color} border border-border/30 flex items-end justify-center pb-3`}
+            className={`relative w-32 h-44 md:w-44 md:h-60 rounded-2xl overflow-hidden border border-border/30 shadow-lg group cursor-pointer`}
           >
-            <span className="text-xs font-medium text-muted-foreground">{style.label}</span>
+            <img
+              src={style.image}
+              alt={style.label}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent`} />
+            <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+              <span className="text-sm font-semibold text-white drop-shadow-md">{style.label}</span>
+            </div>
           </motion.div>
         ))}
       </motion.div>

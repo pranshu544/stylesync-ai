@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const Auth = () => (
   <div className="min-h-screen bg-background flex items-center justify-center px-4">
     {/* Ambient glow */}
-    <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-gradient-pink/10 rounded-full blur-[100px]" />
-    <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-gradient-purple/10 rounded-full blur-[100px]" />
+    <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-gradient-pink/8 rounded-full blur-[120px]" />
+    <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-gradient-purple/8 rounded-full blur-[120px]" />
 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -15,9 +15,19 @@ const Auth = () => (
       className="glass rounded-2xl p-8 w-full max-w-sm text-center relative z-10"
     >
       <Link to="/">
-        <img src={logo} alt="StyleSync AI" className="h-14 w-14 mx-auto mb-4 rounded-xl" />
+        <motion.div
+          className="logo-highlight mx-auto mb-4 w-fit"
+          animate={{ boxShadow: [
+            '0 0 20px -2px hsl(325 90% 58% / 0.5), 0 0 40px -4px hsl(272 72% 47% / 0.3)',
+            '0 0 30px -2px hsl(272 72% 47% / 0.6), 0 0 50px -4px hsl(174 100% 42% / 0.4)',
+            '0 0 20px -2px hsl(325 90% 58% / 0.5), 0 0 40px -4px hsl(272 72% 47% / 0.3)'
+          ] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <img src={logo} alt="OutfitCheck AI" className="h-24 w-24" />
+        </motion.div>
       </Link>
-      <h1 className="text-2xl font-bold mb-2">Welcome to <span className="gradient-text">StyleSync AI</span></h1>
+      <h1 className="text-2xl font-bold mb-2">Welcome to <span className="gradient-text">OutfitCheck AI</span></h1>
       <p className="text-sm text-muted-foreground mb-8">Sign in to start your virtual try-on experience.</p>
 
       <GradientButton

@@ -3,20 +3,26 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GlassCard from "@/components/ui/GlassCard";
 import GradientButton from "@/components/ui/GradientButton";
-import { Upload as UploadIcon, Camera, ImageIcon, AlertCircle } from "lucide-react";
+import { Upload as UploadIcon, Camera, ImageIcon, AlertCircle, Sparkles } from "lucide-react";
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_SIZE_MB = 10;
 
+// n8n Webhook URL — Production URL use karo jab workflow active ho
+const N8N_WEBHOOK_URL = "https://pranshu544.app.n8n.cloud/webhook/outfitcheck";
+
 const UploadPage = () => {
+  const navigate = useNavigate();
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [statusText, setStatusText] = useState("");
 
   const validateFile = (f: File): string | null => {
     if (!ACCEPTED_TYPES.includes(f.type)) return "Please upload a JPG, PNG, or WebP image.";
@@ -38,21 +44,54 @@ const UploadPage = () => {
     if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
   }, [handleFile]);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
+    if (!file) return;
     setUploading(true);
     setProgress(0);
-    // Simulate upload + AI processing
-    const interval = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) { clearInterval(interval); return 100; }
-        return p + Math.random() * 15;
+    setError(null);
+
+    try {
+      // Step 1: Upload progress animation
+      setStatusText("📤 Uploading your photo...");
+      setProgress(15);
+
+      // Send image to n8n webhook
+      const formData = new FormData();
+      formData.append("Your_Input_Image", file);
+
+      setStatusText("🤖 AI is analyzing your style...");
+      setProgress(40);
+
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        body: formData,
       });
-    }, 300);
-    setTimeout(() => {
-      clearInterval(interval);
+
+      setProgress(70);
+      setStatusText("✨ Generating outfit recommendations...");
+
+      if (!response.ok) {
+        throw new Error("AI service is busy. Please try again in a moment.");
+      }
+
+      const data = await response.json();
       setProgress(100);
+      setStatusText("🎉 Your outfits are ready!");
+
+      // Save results and navigate
+      localStorage.setItem("outfitcheck_results", JSON.stringify(data));
+      localStorage.setItem("outfitcheck_preview", preview || "");
+
+      setTimeout(() => {
+        navigate("/results");
+      }, 500);
+
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
       setUploading(false);
-    }, 4000);
+      setProgress(0);
+      setStatusText("");
+    }
   };
 
   return (
@@ -120,7 +159,7 @@ const UploadPage = () => {
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full gradient-bg animate-pulse" />
-                      <span className="text-sm text-muted-foreground">AI is styling your look...</span>
+                      <span className="text-sm text-muted-foreground">{statusText || "AI is styling your look..."}</span>
                     </div>
                     <Progress value={Math.min(progress, 100)} className="h-2" />
                   </div>

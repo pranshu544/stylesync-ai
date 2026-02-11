@@ -36,10 +36,10 @@ const GradientButton = forwardRef<HTMLButtonElement, GradientButtonProps>(
     return (
       <motion.button
         ref={ref}
-        whileHover={{ scale: 1.03, boxShadow: "0 0 40px -5px hsl(338 100% 65% / 0.5)" }}
+        whileHover={{ scale: 1.03, boxShadow: "0 0 40px -5px hsl(325 90% 52% / 0.4)" }}
         whileTap={{ scale: 0.97 }}
         className={cn(
-          "gradient-bg rounded-lg font-semibold text-foreground transition-all duration-300 glow-pink",
+          "gradient-bg rounded-lg font-semibold text-white transition-all duration-300 glow-pink",
           sizeClasses[size],
           className
         )}

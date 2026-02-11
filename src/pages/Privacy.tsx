@@ -37,7 +37,7 @@ const Privacy = () => (
             Your <span className="gradient-text">Privacy</span> Matters
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-md mx-auto">
-            StyleSync AI is built with privacy as a core principle. Here's exactly what we do with your data.
+            OutfitCheck AI is built with privacy as a core principle. Here's exactly what we do with your data.
           </p>
 
           <div className="space-y-6">
@@ -62,7 +62,7 @@ const Privacy = () => (
           </div>
 
           <div className="mt-12 text-center text-xs text-muted-foreground">
-            Last updated: February 2026. Questions? Contact us at privacy@stylesync.ai
+            Last updated: February 2026. Questions? Contact us at privacy@outfitcheck.ai
           </div>
         </motion.div>
       </div>

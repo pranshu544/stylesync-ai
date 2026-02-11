@@ -18,7 +18,7 @@ const Benefits = () => (
         className="text-center mb-16"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Why <span className="gradient-text">StyleSync AI</span>?
+          Why <span className="gradient-text">OutfitCheck AI</span>?
         </h2>
         <p className="text-muted-foreground max-w-md mx-auto">
           Built for Gen Z. Designed for everyone.

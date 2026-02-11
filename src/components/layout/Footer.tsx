@@ -7,9 +7,11 @@ const Footer = () => (
     <div className="container mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="StyleSync AI" className="h-8 w-8 rounded-lg" />
-            <span className="font-bold gradient-text">StyleSync AI</span>
+          <div className="flex items-center gap-2.5">
+            <div className="logo-highlight-sm">
+              <img src={logo} alt="OutfitCheck AI" className="h-11 w-11" />
+            </div>
+            <span className="text-lg font-bold gradient-text">OutfitCheck AI</span>
           </div>
           <p className="text-sm text-muted-foreground">
             AI-powered virtual try-on for the next generation of fashion lovers.
@@ -43,7 +45,7 @@ const Footer = () => (
       </div>
 
       <div className="mt-10 pt-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-3">
-        <p className="text-xs text-muted-foreground">© 2026 StyleSync AI. All rights reserved.</p>
+        <p className="text-xs text-muted-foreground">© 2026 OutfitCheck AI. All rights reserved.</p>
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
           <Shield size={14} />
           <span>Your photos are auto-deleted. We never store images permanently.</span>

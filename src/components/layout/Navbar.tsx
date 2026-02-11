@@ -2,11 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import GradientButton from "@/components/ui/GradientButton";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Clock } from "lucide-react";
 import { useState } from "react";
 
 const navLinks = [
   { label: "How It Works", href: "/#how-it-works" },
+  { label: "History", href: "/history" },
   { label: "Pricing", href: "/pricing" },
   { label: "Privacy", href: "/privacy" },
 ];
@@ -23,9 +24,11 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/30"
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="StyleSync AI" className="h-9 w-9 rounded-lg" />
-          <span className="text-lg font-bold gradient-text">StyleSync AI</span>
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <div className="logo-highlight-sm">
+            <img src={logo} alt="OutfitCheck AI" className="h-12 w-12" />
+          </div>
+          <span className="text-xl font-bold gradient-text group-hover:opacity-90 transition-opacity">OutfitCheck AI</span>
         </Link>
 
         {/* Desktop nav */}
@@ -39,7 +42,7 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link to="/auth">
+          <Link to="/upload">
             <GradientButton size="sm">Try Your Style</GradientButton>
           </Link>
         </div>
@@ -70,7 +73,7 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link to="/auth" onClick={() => setMobileOpen(false)}>
+          <Link to="/upload" onClick={() => setMobileOpen(false)}>
             <GradientButton size="sm" className="mt-2 w-full">
               Try Your Style
             </GradientButton>

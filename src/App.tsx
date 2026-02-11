@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Upload from "./pages/Upload";
 import Results from "./pages/Results";
 import Dashboard from "./pages/Dashboard";
+import History from "./pages/History";
 import Pricing from "./pages/Pricing";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/history" element={<History />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/privacy" element={<Privacy />} />
