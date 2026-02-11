@@ -4,7 +4,8 @@ import Footer from "@/components/layout/Footer";
 import GlassCard from "@/components/ui/GlassCard";
 import GradientButton from "@/components/ui/GradientButton";
 import { Check, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRazorpay } from "@/hooks/use-razorpay";
 
 const tiers = [
   {
@@ -38,7 +39,19 @@ const tiers = [
   },
 ];
 
-const Pricing = () => (
+const Pricing = () => {
+  const { initiatePayment } = useRazorpay();
+  const navigate = useNavigate();
+
+  const handleCta = (tierName: string) => {
+    if (tierName === "Pro") {
+      initiatePayment();
+    } else {
+      navigate("/upload");
+    }
+  };
+
+  return (
   <div className="min-h-screen bg-background">
     <Navbar />
     <main className="pt-24 pb-16">
@@ -82,11 +95,14 @@ const Pricing = () => (
                     </li>
                   ))}
                 </ul>
-                <Link to="/auth">
-                  <GradientButton variant={tier.popular ? "filled" : "outline"} className="w-full" size="lg">
-                    {tier.cta}
-                  </GradientButton>
-                </Link>
+                <GradientButton
+                  variant={tier.popular ? "filled" : "outline"}
+                  className="w-full"
+                  size="lg"
+                  onClick={() => handleCta(tier.name)}
+                >
+                  {tier.cta}
+                </GradientButton>
               </GlassCard>
             </motion.div>
           ))}
@@ -95,6 +111,7 @@ const Pricing = () => (
     </main>
     <Footer />
   </div>
-);
+  );
+};
 
 export default Pricing;

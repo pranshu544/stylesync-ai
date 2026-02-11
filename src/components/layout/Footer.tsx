@@ -31,6 +31,10 @@ const Footer = () => (
           <h4 className="font-semibold text-foreground mb-3">Legal</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link></li>
+            <li><Link to="/refund" className="hover:text-foreground transition-colors">Refund Policy</Link></li>
+            <li><Link to="/shipping" className="hover:text-foreground transition-colors">Shipping & Delivery</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
           </ul>
         </div>
 
